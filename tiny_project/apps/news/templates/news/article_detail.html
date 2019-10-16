@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 
+{#
+Because our view inherits from PageDetailMixin, all of the things we need
+to render our title (including whether it's an override of the object's
+title) is already in the context! We don't need to override the title block
+or anything else.
+#}
+
 {% block main %}
   <h1>{{ object.title }}</h1>
 

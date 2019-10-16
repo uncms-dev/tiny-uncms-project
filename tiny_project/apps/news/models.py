@@ -20,14 +20,28 @@ class NewsFeed(ContentBase):
 
     icon = 'icons/news.png'
 
-    # The urlconf used to power this content's views.
+    # The urlconf used to power this content's views. We don't *have* to
+    # specify this at all! If we did not then it would simply render a
+    # template at <app_label>/<model_name>.html. But this allows us to have
+    # have complete control of every
     urlconf = 'tiny_project.apps.news.urls'
 
+    # ContentBase derivatives don't have ModelAdmins at all - their fields get
+    # automatically patched into the form for the *Page*. But, we like
+    # fieldsets! So we simply define them on the model. There's no need to
+    # list the various SEO and publication fields on the Page here; these will
+    # be added automatically.
     fieldsets = [
-        (None, {
+        ('Settings', {
             'fields': ['per_page'],
         }),
     ]
+
+    # And on to some model fields. The great part of the simple data model of
+    # onespacemedia-cms is that it makes it really easy to define page
+    # settings that are not visible to non-admin users. Here, we want admin
+    # control over how many will be displayed on a page. We'll be able to
+    # access this later in the view.
 
     per_page = models.IntegerField(
         verbose_name='Articles per page',
