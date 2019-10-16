@@ -1,4 +1,4 @@
-#!/usr/bin/env python -Wa
+#!/usr/bin/env python
 import os
 import pwd
 import sys
