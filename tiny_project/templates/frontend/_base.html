@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block site %}
+  <frontend-switcher></frontend-switcher>
+
+  {{ super() }}
+{% endblock %}
+
+{% block compressed_js_first %}
+  <script type="text/javascript">
+    window.frontendTemplates = {{ frontend_templates() }}
+  </script>
+{% endblock %}

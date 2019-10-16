@@ -1,0 +1,15 @@
+/* minimal effort stylesheet */
+
+.hd-Header {
+  justify-content: space-between;
+
+  display: flex;
+  padding: 20px 30px;
+
+  background-color: #000;
+  color: #fff;
+}
+
+.hd-Header a {
+  color: inherit;
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="description"
+          content="{% block meta_description %}{{ get_meta_description() }}{% endblock %}">
+    <meta name="robots" content="{% block meta_robots %}{{ get_meta_robots() }}{% endblock %}">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=5">
+
+    {# TODO: Change this value #}
+    <meta name="theme-color" content="#db5945">
+
+    {% block canonical %}
+      <link rel="canonical" href="{{ get_canonical_url() }}" />
+    {% endblock %}
+
+    {% if page_obj and page_obj.has_other_pages() %}
+      {% if page_obj.has_previous() %}
+        <link rel="previous" href="{{ get_pagination_url(page_obj.previous_page_number()) }}">
+      {% endif %}
+
+      {% if page_obj.has_next() %}
+        <link rel="next" href="{{ get_pagination_url(page_obj.next_page_number()) }}">
+      {% endif %}
+    {% endif %}
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="{% block og_title %}{{ get_og_title() }}{% endblock %}">
+    <meta property="og:url" content="{{ get_canonical_url() }}">
+    <meta property="og:type" content="website">
+    <meta property="og:description"
+          content="{% block og_description %}{{ get_og_description() }}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ get_og_image() }}{% endblock %}">
+
+    <!-- Twitter card data -->
+    <meta name="twitter:card"
+          content="{% block twitter_card %}{{ get_twitter_card() }}{% endblock %}" />
+    <meta name="twitter:site" content="" />
+    <meta name="twitter:title"
+          content="{% block twitter_title %}{{ get_twitter_title() }}{% endblock %}" />
+    <meta name="twitter:description"
+          content="{% block twitter_description %}{{ get_twitter_description() }}{% endblock %}" />
+    <meta name="twitter:image"
+          content="{% block twitter_image %}{{ get_twitter_image() }}{% endblock %}" />
+
+    <title>{% block title %}{{ render_title() }}{% endblock %}</title>
+
+    {% block feeds %}{% endblock %}
+
+    <link rel="stylesheet" href="{{ static('css/style.css') }}">
+
+  </head>
+
+  <body>
+    <header class="hd-Header">
+      <a class="hd-Header_Title" href="/">{{ settings.SITE_NAME }}</a>
+
+      <nav class="hd-Nav">
+        {{ render_navigation(pages.homepage.navigation) }}
+      </nav>
+    </header>
+
+    <main class="lyt-Main">
+      {% block main %}
+      {% endblock %}
+    </main>
+  </body>
+</html>
