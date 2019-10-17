@@ -12,6 +12,6 @@ Suggested reading order:
 * `tiny_project/apps/news/models.py` for how to create page content models & the most useful helper classes
 * `tiny_project/apps/news/admin.py` for how to register such things
 * `tiny_project/apps/news/views.py` to use RequestPageManager for fun and profit
-* `tiny_project/apps/content/models.py` for how to register inlines on page content models
-* `tiny_project/apps/content/admin.py` for how to register inlines on page content models
+* `tiny_project/apps/content/models.py` for an example of inline models on page content models
+* `tiny_project/apps/content/admin.py` immediately after that, for how to actually register them
 * `templates/base.html`
