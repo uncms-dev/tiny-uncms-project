@@ -9,6 +9,7 @@
 # Because PageBaseAdmin inherits from OnlineBaseAdmin, it'll also obey
 # the ONLINE_DEFAULT setting (whether newly objects are on or offline by
 # default).
+
 from cms.admin import PageBaseAdmin
 from django.contrib import admin
 
