@@ -7,8 +7,4 @@ from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tiny_project.settings.production')
 
-# For HTTPS sites, enable these.
-# os.environ.setdefault('HTTPS', 'on')
-# os.environ.setdefault('wsgi.url_scheme', 'https')
-
 application = get_wsgi_application()
