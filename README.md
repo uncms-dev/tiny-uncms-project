@@ -1,7 +1,7 @@
 a tiny CMS project 🐭
 =====================
 
-A bare minimum example of a CMS project, documenting some core functions of [onespacemedia-cms](https://github.com/onespacemedia/cms) and demonstrating how to be friends with the CMS's helper models and admin classes. This is probably the most absurdly highly-commented code you will ever read; it's intended as a crash-course in building sites with our CMS.
+A bare minimum example of a CMS project, documenting some core functions of [onespacemedia-cms](https://github.com/onespacemedia/cms) and demonstrating how to make friends with the CMS's helper models and admin classes. This is probably the most absurdly highly-commented code you will ever read; it's intended as a crash-course in building sites with our CMS.
 
 This is operating in tandem with an upcoming total rewrite of the CMS's documentation.
 
@@ -15,3 +15,13 @@ Suggested reading order:
 * `tiny_project/apps/content/models.py` for an example of inline models on page content models
 * `tiny_project/apps/content/admin.py` immediately after that, for how to actually register them
 * `templates/base.html`
+
+Quickstart:
+
+```
+createdb tiny_project
+virtualenv -p python3.6 .venv
+. .venv/bin/activate
+pip install -r requirements.txt
+./manage.py runserver
+```
