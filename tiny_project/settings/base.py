@@ -1,39 +1,37 @@
+'''
+Settings for your tiny CMS project.
+
+For your reading pleasure, anything with a comment above it documents
+settings that are specific to onespacemedia-cms. Everything else is left
+uncommented on purpose. Thus, if you see a comment it is something you will
+need to pay attention to, or at least copy-paste :)
+'''
+
 import os
 import sys
 
-###
-#  ___
-# | _ ) __ _  ___ ___
-# | _ \/ _` |(_-</ -_)
-# |___/\__,_|/__/\___|
-#
-###
+# The CMS's page template functions assume this is present.
 SITE_NAME = 'a tiny project'
+# This too - it is used to turn relative /urls/ into http://actual.absolute/urls/.
 SITE_DOMAIN = 'example.com'
-PREPEND_WWW = True
 
-# only required in this settings file
-SITE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+# PublicationMiddleware will automagically exclude any objects that do not
+# have their is_online field set from any querysets. Of course, you probably
+# don't want to do that for EVERY request. Being able to view them in the
+# admin is useful for administrators, after all :) You will want to change
+# this if your admin lives anywhere but /admin/.
+PUBLICATION_MIDDLEWARE_EXCLUDE_URLS = (
+    '^admin/.*',
+)
 
-ALLOWED_HOSTS = [
-    SITE_DOMAIN,
-    'www.{}'.format(SITE_DOMAIN),
-]
+# This controls whether a new Page (and anything else that inherits from
+# OnlineBase) will have `is_online` set to True by default. This is the
+# default setting.
+ONLINE_DEFAULT = True
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-    }
-}
-
-# A secret key used for cryptographic algorithms. CHANGE THIS!!
-# dd if=/dev/urandom of=/dev/stdout bs=50 count=1 | base64
-SECRET_KEY = ''
-
-# Ignores certain warnings on startup and/or `manage.py check`
-SILENCED_SYSTEM_CHECKS = []
+# If you have a TinyPNG API key, all images will be automatically optimised on
+# save by the media app.
+TINYPNG_API_KEY = ''
 
 INSTALLED_APPS = [
     'django.contrib.sessions',
@@ -43,27 +41,40 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
 
+    # This is required for the thumbnailing in the Media app's admin.
     'sorl.thumbnail',
-
-    'osm_jet',
-    'cms',
 
     'reversion',
     'historylinks',
     'watson',
 
+    # Our basic CMS apps.
+    'cms',
+    # This gives you the Page class, the reason that we exist!
     'cms.apps.pages',
+    # The media app is required by the Page class.
     'cms.apps.media',
+    # This is not required at all, but it's handy. It provides a Link content
+    # model that allows entries in your navigation to link to arbitrary URLs.
     'cms.apps.links',
 
+    # Our local apps. You'll want to look at the code for them after you have
+    # read this settings file.
     'tiny_project.apps.news',
     'tiny_project.apps.content',
 
+    # django-jet and the Onespacemedia Jet theme are by no means required, but
+    # they do make your admin very nice.
+    'osm_jet',
     'jet.dashboard',
     'jet',
     'django.contrib.admin',
     'adminsortable2',
 ]
+
+
+# The CMS does not require this, but the TEMPLATES setting below does.
+SITE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 TEMPLATES = [
     {
@@ -77,11 +88,6 @@ TEMPLATES = [
             'match_regex': r'^(?!admin/|reversion/|registration/|jet.dashboard/|adminsortable2/|sitemap\.xml|debug_toolbar/).*',
             'app_dirname': 'templates',
             'newstyle_gettext': True,
-            'bytecode_cache': {
-                'name': 'default',
-                'backend': 'django_jinja.cache.BytecodeCache',
-                'enabled': False,
-            },
             'autoescape': True,
             'auto_reload': False,
             'translation_engine': 'django.utils.translation',
@@ -93,12 +99,14 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
-                'cms.context_processors.settings',
+                # This puts the current page tree into the context, as `pages`.
                 'cms.apps.pages.context_processors.pages',
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect'
-            ]
-        }
+                # Not at all necessary, but just about every project wants
+                # access to `settings` (django.conf.settings) in their
+                # template.
+                'cms.context_processors.settings',
+            ],
+        },
     },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -117,43 +125,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'cms.context_processors.settings',
                 'cms.apps.pages.context_processors.pages',
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect'
-            ]
-        }
-    }
+            ],
+        },
+    },
 ]
-# Namespace for cache keys, if using a process-shared cache.
-CACHE_MIDDLEWARE_KEY_PREFIX = 'tiny_project'
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
-    }
-}
 
-###
-#  _                    _  _            _    _
-# | |    ___  __  __ _ | |(_) ___ __ _ | |_ (_) ___  _ __
-# | |__ / _ \/ _|/ _` || || |(_-</ _` ||  _|| |/ _ \| '  \
-# |____|\___/\__|\__,_||_||_|/__/\__,_| \__||_|\___/|_||_|
-#
-###
-# GEOIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../geoip/'))
-TIME_ZONE = 'Europe/London'
-LANGUAGE_CODE = 'en-gb'
-USE_I18N = False
-USE_L10N = True
-USE_TZ = True
-
-
-###
-#  ___   _                  _        _
-# |   \ (_) ___ _ __  __ _ | |_  __ | |__
-# | |) || |(_-<| '_ \/ _` ||  _|/ _|| '  \
-# |___/ |_|/__/| .__/\__,_| \__|\__||_||_|
-#              |_|
-###
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -163,10 +139,68 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'watson.middleware.SearchContextMiddleware',
+    # The CMS uses historylinks for pages so that a slug change will create an
+    # automatic redirect for the page. You don't absolutely need this, but you
+    # secretly do even if you don't think you do.
     'historylinks.middleware.HistoryLinkFallbackMiddleware',
+    # You will need both of these for onespacemedia-cms to function properly.
+    # The first handles the CMS's publication system; it will ensure that
+    # things with publication controls (pages, and anything else derived from
+    # OnlineBase) do not show to logged-out users.
     'cms.middleware.PublicationMiddleware',
+    # This annotates requests with the current page tree (as `request.pages`).
     'cms.apps.pages.middleware.PageMiddleware',
 ]
+
+#
+# TinyMCE options for the HTML editor (HtmlField).
+# These map directly onto TinyMCE options. These are sensible defaults and are
+# very close to what we use in production projects. More options are available
+# here:
+# https://www.tiny.cloud/docs-4x/configure/integration-and-setup/
+#
+WYSIWYG_OPTIONS = {
+    # Overall height of the WYSIWYG
+    'height': 500,
+
+    # The one to pay attention to here is `cmsimage` - it allows you to insert
+    # images from your media library.
+    'plugins': [
+        'advlist autolink link image lists charmap hr anchor pagebreak',
+        'wordcount visualblocks visualchars code fullscreen cmsimage hr',
+    ],
+    # cmsimage here gives you the aforementioned item in your toolbar.
+    'toolbar1': 'code | cut copy pastetext | undo redo | bullist numlist | link unlink anchor cmsimage | blockquote',
+    'menubar': False,
+    'toolbar_items_size': 'small',
+    'block_formats': 'Paragraph=p;Header 2=h2;Header 3=h3;Header 4=h4;Header 5=h5;Header 6=h6;',
+    'convert_urls': False,
+    'paste_as_text': True,
+    'image_advtab': True,
+}
+
+ALLOWED_HOSTS = [
+    SITE_DOMAIN,
+    'www.{}'.format(SITE_DOMAIN),
+]
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+    }
+}
+
+SECRET_KEY = ''
+
+SILENCED_SYSTEM_CHECKS = []
+
+TIME_ZONE = 'Europe/London'
+LANGUAGE_CODE = 'en-gb'
+USE_I18N = False
+USE_L10N = True
+USE_TZ = True
 
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.Argon2PasswordHasher',
@@ -179,83 +213,26 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 SITE_ID = 1
 
-
-###
-#  _____  _     _          _                     _
-# |_   _|| |_  (_) _ _  __| |   _ __  __ _  _ _ | |_  _  _
-#   | |  | ' \ | || '_|/ _` |  | '_ \/ _` || '_||  _|| || |
-#   |_|  |_||_||_||_|  \__,_|  | .__/\__,_||_|   \__| \_, |
-#                              |_|                    |__/
-###
-PUBLICATION_MIDDLEWARE_EXCLUDE_URLS = (
-    '^admin/.*',
-)
-
-
-JET_CHANGE_FORM_SIBLING_LINKS = False
-JET_DEFAULT_THEME = 'osm'
-
-ONLINE_DEFAULT = True
-
-TINYPNG_API_KEY = ''
-
-WYSIWYG_OPTIONS = {
-    # Overall height of the WYSIWYG
-    'height': 500,
-
-    # Main plugins to load, this has been stripped to match the toolbar
-    # See https://www.tinymce.com/docs/get-started/work-with-plugins/
-    'plugins': [
-        'advlist autolink link image lists charmap hr anchor pagebreak',
-        'wordcount visualblocks visualchars code fullscreen cmsimage hr',
-    ],
-
-    # Items to display on the 3 toolbar lines
-    'toolbar1': 'code | cut copy pastetext | undo redo | bullist numlist | link unlink anchor cmsimage | blockquote charmap',
-
-    # Display menubar with dropdowns
-    'menubar': False,
-
-    # Make toolbar smaller
-    'toolbar_items_size': 'small',
-
-    'block_formats': 'Paragraph=p;Header 2=h2;Header 3=h3;Header 4=h4;Header 5=h5;Header 6=h6;',
-
-    # Disable automatic URL manipulation
-    'convert_urls': False,
-
-    # Make TinyMCE past as text by default
-    'paste_as_text': True,
-
-    'image_advtab': True,
-}
-
-
-###
-#  _   _        _                _          _     __      _          _    _
-# | | | | _ __ | | ___  __ _  __| | ___  __| |   / /  ___| |_  __ _ | |_ (_) __
-# | |_| || '_ \| |/ _ \/ _` |/ _` |/ -_)/ _` |  / /  (_-<|  _|/ _` ||  _|| |/ _|
-#  \___/ | .__/|_|\___/\__,_|\__,_|\___|\__,_| /_/   /__/ \__|\__,_| \__||_|\__|
-#        |_|
-###
-MEDIA_ROOT = '/var/www/tiny_project_media'
-MEDIA_URL = '/media/'
-
-STATIC_ROOT = '/var/www/tiny_project_static'
-STATIC_URL = '/static/'
-
 FILE_UPLOAD_PERMISSIONS = 0o644
 
 STATICFILES_DIRS = (
-    os.path.join(SITE_ROOT, 'assets'),  # For webpack_loader
     os.path.join(SITE_ROOT, 'static'),
 )
+
+STATIC_ROOT = os.path.join(SITE_ROOT, 'static')
+STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(SITE_ROOT, 'media')
+MEDIA_URL = '/media/'
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
+# django-jet and osm-jet are not required by the CMS, but they make your admin
+# quite a lot nicer.
+JET_CHANGE_FORM_SIBLING_LINKS = False
+JET_DEFAULT_THEME = 'osm'
 
 
 if 'test' in sys.argv:
