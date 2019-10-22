@@ -163,11 +163,7 @@ class Article(PageBase):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self, page=None):
-        '''
-        Returns the URL of the article.
-        '''
-
+    def get_absolute_url(self):
         # OK, so once we have our urlconf on our content object, whereever we
         # we have access to that content, we reverse those URLs almost exactly
         # as we use django's standard reverse.
