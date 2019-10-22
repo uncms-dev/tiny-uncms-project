@@ -132,6 +132,7 @@ class Article(PageBase):
     image = ImageRefField(
         null=True,
         blank=True,
+        on_delete=models.PROTECT,
     )
 
     # HtmlField is like a TextField, but gives you a full-featured TinyMCE

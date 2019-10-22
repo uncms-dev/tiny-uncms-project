@@ -23,6 +23,7 @@ class ContentSection(models.Model):
     # model!
     page = models.ForeignKey(
         'pages.Page',
+        on_delete=models.CASCADE,
     )
 
     title = models.CharField(
