@@ -1,7 +1,7 @@
 # We'll explain PageDetailMixin later, but the short version is that if you
 # are displaying a DetailView for a model that inherits from PageBase, you
 # definitely want to inherit from PageDetailMixin too.
-from cms.views import PageDetailMixin
+from cms.views import PageDetailView
 from django.views.generic import DetailView, ListView
 
 from .models import Article
@@ -45,7 +45,7 @@ class ArticleListView(ListView):
 #
 # Likewise, there's a SearchMetaDetailMixin for models that inherit from
 # SearchMetaBase.
-class ArticleDetailView(PageDetailMixin, DetailView):
+class ArticleDetailView(PageDetailView):
     '''Displays a single article.'''
 
     # We're kinda repeating outself with this; we could probably inherit both
