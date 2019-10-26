@@ -2,7 +2,7 @@
 # are displaying a DetailView for a model that inherits from PageBase, you
 # definitely want to inherit from PageDetailMixin too.
 from cms.views import PageDetailView
-from django.views.generic import DetailView, ListView
+from django.views.generic import ListView
 
 from .models import Article
 
