@@ -1,6 +1,6 @@
-# We'll explain PageDetailMixin later, but the short version is that if you
+# We'll explain PageDetailView later, but the short version is that if you
 # are displaying a DetailView for a model that inherits from PageBase, you
-# definitely want to inherit from PageDetailMixin too.
+# definitely want to inherit from PageDetailView.
 from cms.views import PageDetailView
 from django.views.generic import ListView
 
@@ -9,9 +9,9 @@ from .models import Article
 
 class ArticleListView(ListView):
     '''Displays a list of articles.'''
-    # ^ hey, don't write docstrings like this. Unless you have a class named
-    # ArticleListView that does not list articles, in which case you have
-    # other, deeper-seated problems. :)
+    # ^ hey, don't write docstrings like this. Unless you are the kind of
+    # person to write a class called ArticleListView that is not a view that
+    # lists articles, in which case you have other, deeper-seated problems. :)
     model = Article
 
     def get_paginate_by(self, queryset):
@@ -36,21 +36,20 @@ class ArticleListView(ListView):
             page__page=self.request.pages.current
         )
 
-# Let's talk about PageDetailMixin.
+# Let's talk about PageDetailView.
 #
 # We have all those nice fields for SEO, OpenGraph, etc which will be rendered
-# by the appropriate template tags. To ensure that the keys we need are in the
-# context, simply inherit your DetailView derivative from PageDetailMixin as
-# well!
+# by the appropriate template functions. To ensure that the keys we need are
+# in the template context, inherit from PageDetailView rather than the
+# standard Django DetailView.
 #
-# Likewise, there's a SearchMetaDetailMixin for models that inherit from
+# Likewise, there's a SearchMetaDetailView for models that inherit from
 # SearchMetaBase.
 class ArticleDetailView(PageDetailView):
-    '''Displays a single article.'''
-
-    # We're kinda repeating outself with this; we could probably inherit both
-    # of these views from ArticleMixin. But we're trying to keep these
-    # examples as simple as possible. Also, copy-pasting is faster!
+    # We're kinda repeating outself with this; we could probably make an
+    # ArticleMixin from which both our list view and our detail view could
+    # inherit. But we're trying to keep these examples as simple as possible.
+    # Also, copy-pasting is faster!
 
     model = Article
 

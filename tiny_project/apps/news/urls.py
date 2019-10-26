@@ -1,5 +1,3 @@
-"""URLs used by the CMS news app."""
-
 from django.conf.urls import url
 
 from . import views
