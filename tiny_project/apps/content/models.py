@@ -6,11 +6,17 @@ from django.db import models
 class Content(ContentBase):
     # We can define no fields at all here! Just its existence as a
     # non-abstract class inheriting from ContentBase will make it available
-    # in the page types.
-    #
+    # in the page types. But let's add an introductory text field anyway:
+
+    introduction = models.TextField(
+        null=True,
+        blank=True,
+    )
+
     # We don't have to specify a urlconf as we did in the news app. If you
     # don't specify one, it will default to rendering the template at
-    # `<app_label>/<modelname>.html` - i.e. `content/content.html` in this case.
+    # `<app_label>/<modelname>.html` - i.e. `content/content.html` in this
+    # case.
 
     def get_searchable_text(self):
         # If you use Watson for your search on your frontend (you really

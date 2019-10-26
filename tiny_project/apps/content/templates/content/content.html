@@ -17,6 +17,12 @@ enough.
   available in the template here as pages.current.content. #}
   <h1>{{ pages.current.title }}</h1>
 
+  {% if pages.current.content.introduction %}
+    <p>
+      {{ pages.current.content.introduction|linebreaksbr }}
+    </p>
+  {% endif %}
+
   {# remember that ContentSection is FKed to `page`, not `Content` :) #}
   {% for section in pages.current.contentsection_set.all() %}
     <section>
