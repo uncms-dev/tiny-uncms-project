@@ -10,8 +10,8 @@ and others.
 from cms.apps.media.models import ImageRefField
 # ...and we want to create a page content model...
 from cms.apps.pages.models import ContentBase
-# ...and a nice HTML editor, and that other thing we'll explain later...
-from cms.models import HtmlField, PageBase
+# ...and a nice HTML editor, and two things we'll explain later...
+from cms.models import HtmlField, PageBase, PageBaseManager
 # ..and of course the CMS plays nice with standard Django fields too :)
 from django.db import models
 from django.utils.timezone import now
@@ -88,6 +88,24 @@ class NewsFeed(ContentBase):
     def __str__(self):
         return self.page.title
 
+
+#
+# I would urge you to read down to the 'Article' model below, then read this
+# comment.
+#
+# ...and now that you are back, let's talk about PageBaseManager. This is the
+# default manager for anything that inherits from PageBase; it ensures that
+# anything set to offline (is_online == False) does not get displayed anywhere
+# except in preview mode or in the admin. But we want to hide news articles
+# that have a publication date set to the future; that gives admins a way of
+# building up a queue of articles to publish. Let's write a simple derivative
+# of PageBaseManager that does this for us.
+#
+class ArticleManager(PageBaseManager):
+    def select_published(self, queryset):
+        return super().select_published(queryset).exclude(date__gt=now())
+
+
 #
 # OK, let's talk about PageBase here. It's a helper (abstract) model to make
 # it easier for you to have article-like models on the fields. It has nearly
@@ -109,6 +127,8 @@ class NewsFeed(ContentBase):
 #
 class Article(PageBase):
     '''A simple news article.'''
+
+    objects = ArticleManager()
 
     # We want to be able to have multiple types of news feed. For example,
     # we might want to have a page of articles called "News" (what your cat
