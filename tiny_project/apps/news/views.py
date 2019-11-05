@@ -36,6 +36,7 @@ class ArticleListView(ListView):
             page__page=self.request.pages.current
         )
 
+
 # Let's talk about PageDetailView.
 #
 # We have all those nice fields for SEO, OpenGraph, etc which will be rendered
