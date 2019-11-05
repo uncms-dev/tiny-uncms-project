@@ -14,11 +14,6 @@ urlpatterns = [
     # Standard admin URLs.
     url(r'^admin/', include(admin.site.urls)),
 
-    # Jet URLs. Nothing in OSM CMS actually depends on the existence of Jet,
-    # but we use it in our projects and the admin is quite nice. :)
-    url(r'^jet/', include('jet.urls', 'jet')),
-    url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
-
     # Permalink redirection service. Parts of the CMS, specifically HTML
     # filtering, depend on this.
     url(r'^r/(?P<content_type_id>\d+)-(?P<object_id>[^/]+)/$', contenttypes_views.shortcut, name='permalink_redirect'),

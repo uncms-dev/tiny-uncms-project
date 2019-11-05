@@ -63,13 +63,7 @@ INSTALLED_APPS = [
     'tiny_project.apps.news',
     'tiny_project.apps.content',
 
-    # django-jet and the Onespacemedia Jet theme are by no means required, but
-    # they do make your admin very nice.
-    'osm_jet',
-    'jet.dashboard',
-    'jet',
     'django.contrib.admin',
-    'adminsortable2',
 ]
 
 
