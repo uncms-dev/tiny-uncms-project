@@ -12,7 +12,7 @@ admin.autodiscover()
 urlpatterns = [
 
     # Standard admin URLs.
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
 
     # Permalink redirection service. Parts of the CMS, specifically HTML
     # filtering, depend on this.
