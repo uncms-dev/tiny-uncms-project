@@ -26,7 +26,7 @@ class ArticleAdmin(PageBaseAdmin):
 
     fieldsets = [
         (None, {
-            'fields': ['title', 'date', 'slug', 'page', 'content', 'summary'],
+            'fields': ['title', 'date', 'slug', 'page', 'image', 'content', 'summary'],
         }),
         PageBaseAdmin.PUBLICATION_FIELDS,
         PageBaseAdmin.SEO_FIELDS,
