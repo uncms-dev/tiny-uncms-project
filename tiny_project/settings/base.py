@@ -141,9 +141,7 @@ MIDDLEWARE = [
     # The first handles the CMS's publication system; it will ensure that
     # things with publication controls (pages, and anything else derived from
     # OnlineBase) do not show to logged-out users.
-    'cms.middleware.PublicationMiddleware',
     # This annotates requests with the current page tree (as `request.pages`).
-    'cms.apps.pages.middleware.PageMiddleware',
 ]
 
 #
