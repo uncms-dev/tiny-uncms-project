@@ -12,11 +12,7 @@ TEMPLATES[0]['OPTIONS']['auto_reload'] = DEBUG
 MEDIA_ROOT = os.path.expanduser(os.path.join('~/Sites', SITE_DOMAIN, 'media'))
 STATIC_ROOT = os.path.expanduser(os.path.join('~/Sites', SITE_DOMAIN, 'static'))
 
-# !!!!!
-# Do not use this in production! Don't forget that this came from a public
-# repo. :)
-# !!!!!
-SECRET_KEY = 'inTUqgV6migfo0WbssBg+zhK5VI9RWDm7NExfBraPGbdwS30xILlwYn+9Ry4x+Pv3ao'
+SECRET_KEY = ''
 
 SITE_DOMAIN = 'localhost:8000'
 
