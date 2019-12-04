@@ -223,12 +223,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-# django-jet and osm-jet are not required by the CMS, but they make your admin
-# quite a lot nicer.
-JET_CHANGE_FORM_SIBLING_LINKS = False
-JET_DEFAULT_THEME = 'osm'
-
-
 if 'test' in sys.argv:
     # The CMS tests use test-only models, which won't be loaded if we only load
     # our real migration files, so point to a nonexistent one, which will make
