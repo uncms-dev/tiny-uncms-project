@@ -4,11 +4,11 @@ chardet==3.0.4
 dateparser==0.7.2
 defusedxml==0.6.0
 Deprecated==1.2.6
-Django==1.11.24
+django>=1.11,<2.3
 django-jinja==2.4.1
 django-reversion==2.0.9
 django-sortedm2m==1.5.0
-django-watson==1.5.2
+django-watson==1.5.3
 docopt==0.6.2
 future==0.17.1
 idna==2.8
@@ -17,7 +17,7 @@ isort==4.3.20
 Jinja2==2.10.1
 lazy-object-proxy==1.4.2
 more-itertools==7.2.0
-onespacemedia-cms==4.1.0
+onespacemedia-cms==4.4.0
 Pillow==6.1.0
 psycopg2==2.8.3
 pylint==2.3.0
