@@ -40,7 +40,7 @@ jobs:
           name: tests
           command: |
             . .venv/bin/activate
-            python manage.py test
+            DJANGO_SECRET_KEY=$(dd if=/dev/urandom of=/dev/stdout bs=48 count=1 | base64) python manage.py test
 workflows:
   version: 2
   test:
