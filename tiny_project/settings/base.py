@@ -29,9 +29,8 @@ PUBLICATION_MIDDLEWARE_EXCLUDE_URLS = (
 # default setting.
 ONLINE_DEFAULT = True
 
-# If you have a TinyPNG API key, all images will be automatically optimised on
-# save by the media app.
-TINYPNG_API_KEY = ''
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 20621440
 
 INSTALLED_APPS = [
     'django.contrib.sessions',
@@ -45,7 +44,6 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
 
     'reversion',
-    'historylinks',
     'watson',
 
     # Our basic CMS apps.
@@ -133,10 +131,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'watson.middleware.SearchContextMiddleware',
-    # The CMS uses historylinks for pages so that a slug change will create an
-    # automatic redirect for the page. You don't absolutely need this, but you
-    # secretly do even if you don't think you do.
-    'historylinks.middleware.HistoryLinkFallbackMiddleware',
     # You will need both of these for onespacemedia-cms to function properly.
     # The first handles the CMS's publication system; it will ensure that
     # things with publication controls (pages, and anything else derived from
@@ -196,9 +190,6 @@ USE_I18N = False
 USE_L10N = True
 USE_TZ = True
 
-PASSWORD_HASHERS = (
-    'django.contrib.auth.hashers.Argon2PasswordHasher',
-)
 ROOT_URLCONF = 'tiny_project.urls'
 
 WSGI_APPLICATION = 'tiny_project.wsgi.application'
