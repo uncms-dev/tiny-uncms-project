@@ -45,14 +45,14 @@ INSTALLED_APPS = [
     'watson',
 
     # Our basic CMS apps.
-    'cms',
+    'uncms',
     # This gives you the Page class, the reason that we exist!
-    'cms.apps.pages',
+    'uncms.apps.pages',
     # The media app is required by the Page class.
-    'cms.apps.media',
+    'uncms.apps.media',
     # This is not required at all, but it's handy. It provides a Link content
     # model that allows entries in your navigation to link to arbitrary URLs.
-    'cms.apps.links',
+    'uncms.apps.links',
 
     # Our local apps. You'll want to look at the code for them after you have
     # read this settings file.
@@ -90,7 +90,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
                 # This puts the current page tree into the context, as `pages`.
-                'cms.apps.pages.context_processors.pages',
+                'uncms.apps.pages.context_processors.pages',
             ],
         },
     },
@@ -109,7 +109,7 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
-                'cms.apps.pages.context_processors.pages',
+                'uncms.apps.pages.context_processors.pages',
             ],
         },
     },
@@ -128,9 +128,9 @@ MIDDLEWARE = [
     # The first handles the CMS's publication system; it will ensure that
     # things with publication controls (pages, and anything else derived from
     # OnlineBase) do not show to logged-out users.
-    'cms.middleware.PublicationMiddleware',
+    'uncms.middleware.PublicationMiddleware',
     # This annotates requests with the current page tree (as `request.pages`).
-    'cms.apps.pages.middleware.PageMiddleware',
+    'uncms.apps.pages.middleware.PageMiddleware',
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
@@ -181,21 +181,3 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
-
-if 'test' in sys.argv:
-    # The CMS tests use test-only models, which won't be loaded if we only load
-    # our real migration files, so point to a nonexistent one, which will make
-    # the test runner fall back to 'syncdb' behavior.
-
-    # Note: This will not catch a situation where a developer commits model
-    # changes without the migration files.
-
-    MIGRATION_MODULES = {}
-    for app in INSTALLED_APPS:
-        app_name = app.split('.')[-1]
-        MIGRATION_MODULES[app_name] = None
-
-    # Remove the localisation middleware
-    if 'cms.middleware.LocalisationMiddleware' in MIDDLEWARE:
-        MIDDLEWARE = tuple(
-            c for c in MIDDLEWARE if c != 'cms.middleware.LocalisationMiddleware')

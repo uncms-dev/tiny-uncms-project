@@ -7,11 +7,11 @@ and others.
 
 # We'll do a fuller explanation of these fields later. Search ahead if you're
 # impatient. But, we want images...
-from cms.apps.media.models import ImageRefField
+from uncms.apps.media.models import ImageRefField
 # ...and we want to create a page content model...
-from cms.apps.pages.models import ContentBase
+from uncms.apps.pages.models import ContentBase
 # ...and a nice HTML editor, and two things we'll explain later...
-from cms.models import HtmlField, PageBase, PageBaseManager
+from uncms.models import HtmlField, PageBase, PageBaseManager
 # ..and of course the CMS plays nice with standard Django fields too :)
 from django.db import models
 from django.utils.timezone import now

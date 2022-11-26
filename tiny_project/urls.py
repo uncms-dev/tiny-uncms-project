@@ -1,4 +1,4 @@
-from cms.sitemaps import registered_sitemaps
+from uncms.sitemaps import registered_sitemaps
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -13,17 +13,17 @@ urlpatterns = [
     # Standard admin URLs.
     path('admin/', admin.site.urls),
 
-    # Permalink redirection service. Parts of the CMS, specifically HTML
+    # Permalink redirection service. Parts of UnCMS, specifically HTML
     # filtering, depend on this.
     re_path(r'^r/(?P<content_type_id>\d+)-(?P<object_id>[^/]+)/$', contenttypes_views.shortcut, name='permalink_redirect'),
 
-    # Google sitemap service. Our CMS models play nice with these too!
+    # Google sitemap service. UnCMS models play nice with these too!
     re_path(r'^sitemap.xml$', sitemaps_views.index, {'sitemaps': registered_sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     # And not just with pages; anything that has a get_absolute_url method can
     # register itself, but it works especially well with anything that inherits
     # from our PageBase model.
     re_path(r'^sitemap-(?P<section>.+)\.xml$', sitemaps_views.sitemap, {'sitemaps': registered_sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-    path('library/', include('cms.apps.media.urls', namespace='media_library')),
+    path('library/', include('uncms.apps.media.urls', namespace='media_library')),
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )

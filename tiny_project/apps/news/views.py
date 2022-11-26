@@ -1,7 +1,7 @@
 # We'll explain PageDetailView later, but the short version is that if you
 # are displaying a DetailView for a model that inherits from PageBase, you
 # definitely want to inherit from PageDetailView.
-from cms.views import PageDetailView
+from uncms.views import PageDetailView
 from django.views.generic import ListView
 
 from .models import Article
