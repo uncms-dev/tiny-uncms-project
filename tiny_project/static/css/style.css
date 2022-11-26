@@ -14,15 +14,3 @@
 .hd-Header a {
   color: inherit;
 }
-
-nav ul {
-  list-style: none;
-}
-
-nav ul li {
-  margin-left: 20px;
-}
-
-nav ul li:first-child {
-  margin-left: 0;
-}

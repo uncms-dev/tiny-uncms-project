@@ -31,7 +31,7 @@ class NewsFeed(ContentBase):
     # anything you like.
     #
     # This will be title-cased when it is rendered in the admin.
-    classifier = 'apps'
+    classifier = 'content'
 
     # An icon at this location (under your static files directory) will be
     # displayed in the "Add a page" screen. ContentBase has a default icon,

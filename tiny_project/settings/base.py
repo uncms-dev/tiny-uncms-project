@@ -10,24 +10,22 @@ need to pay attention to, or at least copy-paste :)
 import os
 import sys
 
-# The CMS's page template functions assume this is present.
+
 SITE_NAME = 'a tiny project'
-# This too - it is used to turn relative /urls/ into http://actual.absolute/urls/.
+
+# This isn't used by UnCMS, but let's define it here rather than several times
+# in this file.
 SITE_DOMAIN = 'example.com'
 
-# PublicationMiddleware will automagically exclude any objects that do not
-# have their is_online field set from any querysets. Of course, you probably
-# don't want to do that for EVERY request. Being able to view them in the
-# admin is useful for administrators, after all :) You will want to change
-# this if your admin lives anywhere but /admin/.
-PUBLICATION_MIDDLEWARE_EXCLUDE_URLS = (
-    '^admin/.*',
-)
-
-# This controls whether a new Page (and anything else that inherits from
-# OnlineBase) will have `is_online` set to True by default. This is the
-# default setting.
-ONLINE_DEFAULT = True
+UNCMS = {
+    # The only required setting! This will be used to canonicalise URLs, from
+    # /paths/ to https://actual.urls/paths/
+    'SITE_DOMAIN': SITE_DOMAIN,
+    # This controls whether a new Page (and anything else that inherits from
+    # OnlineBase) will have `is_online` set to True by default. Let's override
+    # the default setting for the funs (and as an example).
+    'ONLINE_DEFAULT': False,
+}
 
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 20621440
@@ -93,10 +91,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 # This puts the current page tree into the context, as `pages`.
                 'cms.apps.pages.context_processors.pages',
-                # Not at all necessary, but just about every project wants
-                # access to `settings` (django.conf.settings) in their
-                # template.
-                'cms.context_processors.settings',
             ],
         },
     },
@@ -115,7 +109,6 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
-                'cms.context_processors.settings',
                 'cms.apps.pages.context_processors.pages',
             ],
         },
@@ -140,32 +133,7 @@ MIDDLEWARE = [
     'cms.apps.pages.middleware.PageMiddleware',
 ]
 
-#
-# TinyMCE options for the HTML editor (HtmlField).
-# These map directly onto TinyMCE options. These are sensible defaults and are
-# very close to what we use in production projects. More options are available
-# here:
-# https://www.tiny.cloud/docs-4x/configure/integration-and-setup/
-#
-WYSIWYG_OPTIONS = {
-    # Overall height of the WYSIWYG
-    'height': 500,
-
-    # The one to pay attention to here is `cmsimage` - it allows you to insert
-    # images from your media library.
-    'plugins': [
-        'advlist autolink link image lists charmap hr anchor pagebreak',
-        'wordcount visualblocks visualchars code fullscreen cmsimage hr',
-    ],
-    # cmsimage here gives you the aforementioned item in your toolbar.
-    'toolbar1': 'code | cut copy pastetext | undo redo | bullist numlist | link unlink anchor cmsimage | blockquote',
-    'menubar': False,
-    'toolbar_items_size': 'small',
-    'block_formats': 'Paragraph=p;Header 2=h2;Header 3=h3;Header 4=h4;Header 5=h5;Header 6=h6;',
-    'convert_urls': False,
-    'paste_as_text': True,
-    'image_advtab': True,
-}
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 ALLOWED_HOSTS = [
     SITE_DOMAIN,

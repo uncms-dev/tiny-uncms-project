@@ -1,0 +1,13 @@
+{% extends 'admin/index.html' %}
+
+{% load i18n static %}
+
+{% block sidebar %}
+  <div id="content-related">
+    <div class="module">
+      <h2>Sitemap</h2>
+
+      {% include 'admin/dashboard_modules/sitemap.html' %}
+    </div>
+  </div>
+{% endblock %}

@@ -41,15 +41,15 @@
     {% block feeds %}{% endblock %}
 
     <link rel="stylesheet" href="{{ static('css/style.css') }}">
-
+    <link rel="stylesheet" href="{{ static('pages/css/sample-navigation.css') }}">
   </head>
 
   <body>
     <header class="hd-Header">
-      <a class="hd-Header_Title" href="/">{{ settings.SITE_NAME }}</a>
+      <a class="hd-Header_Title" href="/">a tiny project</a>
 
       <nav class="hd-Nav">
-        {{ render_navigation(pages.homepage.navigation) }}
+        {{ render_navigation(pages.homepage.navigation, item_template="pages/navigation/menu_item_extended.html") }}
       </nav>
     </header>
 

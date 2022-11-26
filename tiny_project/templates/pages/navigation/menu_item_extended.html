@@ -1,0 +1,8 @@
+{# This provides an example of overriding a navigation item template. #}
+{% extends 'pages/navigation/navigation_item.html' %}
+
+{% block link_inside_bottom %}
+  {# be kind, rewind! always use super when extending #}
+  {{ super() }}
+  {% if entry.children %}⬇{% endif %}
+{% endblock %}
