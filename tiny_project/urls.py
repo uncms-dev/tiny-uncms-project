@@ -23,7 +23,7 @@ urlpatterns = [
     # register itself, but it works especially well with anything that inherits
     # from our PageBase model.
     re_path(r'^sitemap-(?P<section>.+)\.xml$', sitemaps_views.sitemap, {'sitemaps': registered_sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-    path('library/', include('uncms.apps.media.urls', namespace='media_library')),
+    path('library/', include('uncms.media.urls', namespace='media_library')),
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )

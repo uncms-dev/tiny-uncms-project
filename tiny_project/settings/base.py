@@ -47,12 +47,12 @@ INSTALLED_APPS = [
     # Our basic CMS apps.
     'uncms',
     # This gives you the Page class, the reason that we exist!
-    'uncms.apps.pages',
+    'uncms.pages',
     # The media app is required by the Page class.
-    'uncms.apps.media',
+    'uncms.media',
     # This is not required at all, but it's handy. It provides a Link content
     # model that allows entries in your navigation to link to arbitrary URLs.
-    'uncms.apps.links',
+    'uncms.links',
 
     # Our local apps. You'll want to look at the code for them after you have
     # read this settings file.
@@ -90,7 +90,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
                 # This puts the current page tree into the context, as `pages`.
-                'uncms.apps.pages.context_processors.pages',
+                'uncms.pages.context_processors.pages',
             ],
         },
     },
@@ -109,7 +109,7 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
-                'uncms.apps.pages.context_processors.pages',
+                'uncms.pages.context_processors.pages',
             ],
         },
     },
@@ -130,7 +130,7 @@ MIDDLEWARE = [
     # OnlineBase) do not show to logged-out users.
     'uncms.middleware.PublicationMiddleware',
     # This annotates requests with the current page tree (as `request.pages`).
-    'uncms.apps.pages.middleware.PageMiddleware',
+    'uncms.pages.middleware.PageMiddleware',
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'

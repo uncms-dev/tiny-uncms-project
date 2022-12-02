@@ -7,9 +7,9 @@ and others.
 
 # We'll do a fuller explanation of these fields later. Search ahead if you're
 # impatient. But, we want images...
-from uncms.apps.media.models import ImageRefField
+from uncms.media.models import ImageRefField
 # ...and we want to create a page content model...
-from uncms.apps.pages.models import ContentBase
+from uncms.pages.models import ContentBase
 # ...and a nice HTML editor, and two things we'll explain later...
 from uncms.models import HtmlField, PageBase, PageBaseManager
 # ..and of course the CMS plays nice with standard Django fields too :)

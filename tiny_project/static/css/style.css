@@ -1,5 +1,15 @@
 /* minimal effort stylesheet */
 
+body {
+  margin: 0 auto;
+  max-width: 1280px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 .hd-Header {
   align-items: center;
   justify-content: space-between;

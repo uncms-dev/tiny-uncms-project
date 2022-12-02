@@ -1,4 +1,4 @@
-from uncms.apps.pages.models import ContentBase
+from uncms.pages.models import ContentBase
 from uncms.models import HtmlField
 from django.db import models
 

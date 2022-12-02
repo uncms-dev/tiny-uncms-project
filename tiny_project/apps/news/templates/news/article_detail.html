@@ -10,5 +10,13 @@ or anything else.
 {% block main %}
   <h1>{{ object.title }}</h1>
 
+  {#
+  Here comes our mad multi-format image renderer! This is far too involved to
+  go in to here (see the documentation), but here is its basic form:
+  #}
+  {% if object.image %}
+    {{ render_image(object.image, width=1280) }}
+  {% endif %}
+
   {{ object.content|html }}
 {% endblock %}

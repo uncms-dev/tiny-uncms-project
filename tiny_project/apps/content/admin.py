@@ -1,4 +1,4 @@
-from uncms.apps.pages.admin import page_admin
+from uncms.pages.admin import page_admin
 from django.contrib.admin import StackedInline
 
 from .models import Content, ContentSection
