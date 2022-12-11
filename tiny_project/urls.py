@@ -6,6 +6,8 @@ from django.contrib.contenttypes import views as contenttypes_views
 from django.contrib.sitemaps import views as sitemaps_views
 from django.urls import include, path, re_path
 
+from tiny_project.views import RobotsTxtView
+
 admin.autodiscover()
 
 
@@ -24,6 +26,7 @@ urlpatterns = [
     # from our PageBase model.
     re_path(r'^sitemap-(?P<section>.+)\.xml$', sitemaps_views.sitemap, {'sitemaps': registered_sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('library/', include('uncms.media.urls', namespace='media_library')),
+    path('robots.txt', RobotsTxtView.as_view(), name='robots_txt'),
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )
