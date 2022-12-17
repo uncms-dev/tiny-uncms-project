@@ -1,7 +1,7 @@
 '''
 Models used by the tiny project's news app.
 
-This will demonstrate the CMS's PageBase helper class, per-page URL routing,
+This will demonstrate UnCMS's PageBase helper class, per-page URL routing,
 and others.
 '''
 
@@ -12,7 +12,7 @@ from uncms.media.models import ImageRefField
 from uncms.pages.models import ContentBase
 # ...and a nice HTML editor, and two things we'll explain later...
 from uncms.models import HtmlField, PageBase, PageBaseManager
-# ..and of course the CMS plays nice with standard Django fields too :)
+# ..and of course UnCMS plays nice with standard Django fields too :)
 from django.db import models
 from django.utils.timezone import now
 
@@ -24,11 +24,11 @@ class NewsFeed(ContentBase):
 
     # On the "Add a page" screen, the available page types are broken down
     # into classifiers. Really, this is just a heading under which this page
-    # type will appear. Typically, at Onespacemedia we use 'apps' for content
-    # models whose primary purpose it is to display links to other content,
-    # and 'content' for content models for which the content is primarily
-    # on-page. That's just convention for us; you can actually name this
-    # anything you like.
+    # type will appear. It is a good idea to use 'apps' for content models
+    # whose primary purpose it is to display links to other content, and
+    # 'content' for content models for which the content is primarily on-page.
+    # That's just convention for us; you can actually name this anything you
+    # like.
     #
     # This will be title-cased when it is rendered in the admin.
     classifier = 'content'
@@ -65,18 +65,18 @@ class NewsFeed(ContentBase):
     ]
 
     # And on to some model fields. The great part of the simple data model of
-    # onespacemedia-cms is that it makes it really easy to define page
-    # settings that are not visible to non-admin users. Here, we want admin
-    # control over how many will be displayed on a page. We'll be able to
-    # access this later in the `get_paginate_by` function in our view.
+    # UnCMS is that it makes it really easy to define page settings that are
+    # not visible to non-admin users. Here, we want admin control over how
+    # will be displayed on a page. We'll be able to  access this later in the
+    # `get_paginate_by` function in our view.
     #
     # Another typical example would be deciding where a form on a "Contact"
     # content model would send emails to. No need to hard-code anything! Some
     # other CMSes make this extraordinarily hard; here you're just writing
     # Django.
     #
-    # Notice also that onespacemedia-cms works perfectly with standard Django
-    # model fields.
+    # Notice also that UnCMS works perfectly with standard Django model
+    # fields.
 
     per_page = models.IntegerField(
         verbose_name='Articles per page',
@@ -157,10 +157,9 @@ class Article(PageBase):
 
     # HtmlField is like a TextField, but gives you a full-featured TinyMCE
     # WYSIWYG editor in your admin. This is just for your convenience.
-    # HtmlField is not used internally in the CMS, and nothing about a
-    # onespacemedia-cms project requires that you use it. You can use your own
-    # favourite field with your own favourite editor here. (BUT YOU SHOULD USE
-    # OURS REALLY)
+    # HtmlField is not used internally in UnCMS, and nothing about an UnCMS
+    # project requires that you use it. You can use your own favourite field
+    # with your own favourite editor here. (BUT YOU SHOULD USE OURS REALLY)
     content = HtmlField()
 
     # Some more standard Django fields :)
@@ -173,7 +172,7 @@ class Article(PageBase):
     )
 
     class Meta:
-        # Not a CMS thing, but if we have two articles assigned to the same
+        # Not an UnCMS thing, but if we have two articles assigned to the same
         # page (as above) they'll both have the same URL, and the
         # queryset.get(...) will throw MultipleObjectsReturned. Let's stop
         # that from happening.

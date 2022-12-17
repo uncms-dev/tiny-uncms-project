@@ -1,7 +1,9 @@
 a tiny UnCMS project 🐭
 =======================
 
-This is a tiny CMS project which documents some core functions of [onespacemedia-cms](https://github.com/lewiscollard/uncms) and demonstrating how to make friends with UnCMS's helper models and admin classes. This is probably the most absurdly highly-commented code you will ever read; it's intended as a crash-course in building sites with UnCMS.
+This is a tiny project which documents some core functions of [UnCMS](https://github.com/lewiscollard/uncms) and demonstrating how to make friends with UnCMS's helper models and admin classes.
+This is probably the most absurdly highly-commented code you will ever read;
+it's intended as a crash-course in building sites with UnCMS.
 
 This is a companion repository for UnCMS's documentation.
 
@@ -22,7 +24,7 @@ Quickstart:
 # add your SECRET_KEY herein :)
 nano tiny_project/settings/local.py
 createdb tiny_project
-# A minimum of 3.6 is required. Later versions should work fine, but this is
+# A minimum of 3.8 is required. Later versions should work fine, but this is
 # what the Ubuntu box this is being written from ships with by default. :)
 python3 -m venv
 . .venv/bin/activate

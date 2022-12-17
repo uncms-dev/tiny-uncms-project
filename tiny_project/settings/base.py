@@ -1,11 +1,11 @@
-'''
-Settings for your tiny CMS project.
+"""
+Settings for your tiny UnCMS project.
 
 For your reading pleasure, anything with a comment above it documents
-settings that are specific to onespacemedia-cms. Everything else is left
-uncommented on purpose. Thus, if you see a comment it is something you will
-need to pay attention to, or at least copy-paste :)
-'''
+settings that are specific to UnCMS. Everything else is left uncommented on
+purpose. Thus, if you see a comment it is something you will need to pay
+attention to, or at least copy-paste :)
+"""
 
 import os
 import sys
@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'reversion',
     'watson',
 
-    # Our basic CMS apps.
+    # Our basic UnCMS apps.
     'uncms',
     # This gives you the Page class, the reason that we exist!
     'uncms.pages',
@@ -97,10 +97,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'watson.middleware.SearchContextMiddleware',
-    # You will need both of these for onespacemedia-cms to function properly.
-    # The first handles the CMS's publication system; it will ensure that
-    # things with publication controls (pages, and anything else derived from
-    # OnlineBase) do not show to logged-out users.
+    # You will need both of these for UnCMS to function properly. The first
+    # handles UnCMS's publication system; it will ensure that things with
+    # publication controls (pages, and anything else derived from OnlineBase)
+    # do not show to logged-out users.
     'uncms.middleware.PublicationMiddleware',
     # This annotates requests with the current page tree (as `request.pages`).
     'uncms.pages.middleware.PageMiddleware',

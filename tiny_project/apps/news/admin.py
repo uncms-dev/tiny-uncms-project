@@ -37,8 +37,8 @@ class ArticleAdmin(PageBaseAdmin):
     def get_form(self, request, obj=None, **kwargs):
         '''
         We don't *have* to do this, and one wonders if it is slightly out
-        of scope for a tiny demo CMS project. But it is kind to have sensible
-        defaults :)
+        of scope for a tiny demo UnCMS project. But it is kind to have
+        sensible defaults :)
         '''
         form = super(ArticleAdmin, self).get_form(request, obj, **kwargs)
         form.base_fields['page'].initial = NewsFeed.objects.first()
