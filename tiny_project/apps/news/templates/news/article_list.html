@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
 
+{% load uncms_pagination %}
+
+
 {% block main %}
   <ul>
     {% for object in object_list %}
       <li>
-        <a href="{{ object.get_absolute_url() }}">{{ object.title }}</a>
+        <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
       </li>
     {% endfor %}
   </ul>
 
-  <h2>Pages:</h2>
+  <p>Pagination:<p>
 
-  {% if page_obj %}
-    {{ render_pagination(page_obj) }}
-  {% endif %}
+  {% pagination page_obj %}
 {% endblock %}

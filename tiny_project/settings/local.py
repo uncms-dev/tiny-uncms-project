@@ -7,8 +7,6 @@ from .base import *  # pylint: disable=unused-wildcard-import,wildcard-import
 
 DEBUG = True
 
-TEMPLATES[0]['OPTIONS']['auto_reload'] = DEBUG
-
 MEDIA_ROOT = os.path.expanduser(os.path.join('~/Sites', SITE_DOMAIN, 'media'))
 STATIC_ROOT = os.path.expanduser(os.path.join('~/Sites', SITE_DOMAIN, 'static'))
 

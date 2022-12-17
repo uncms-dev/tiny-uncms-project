@@ -1,21 +1,23 @@
 {% extends 'base.html' %}
 
-{#
+{% load uncms_images uncms_html %}
+
+{% comment %}
 Because our view inherits from PageDetailMixin, all of the things we need
 to render our title (including whether it's an override of the object's
 title) is already in the context! We don't need to override the title block
 or anything else.
-#}
+{% endcomment %}
 
 {% block main %}
   <h1>{{ object.title }}</h1>
 
-  {#
+  {% comment %}
   Here comes our mad multi-format image renderer! This is far too involved to
   go in to here (see the documentation), but here is its basic form:
-  #}
+  {% endcomment %}
   {% if object.image %}
-    {{ render_image(object.image, width=1280) }}
+    {% image object.image width=1280 %}
   {% endif %}
 
   {{ object.content|html }}

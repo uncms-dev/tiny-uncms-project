@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
-{#
+{% load uncms_html %}
+
+{% comment %}
 As mentioned elsewhere, but perhaps worth re-iterating. Nowhere have we told
-the CMS to render the page using this template.
+UnCMS to render the page using this template.
 
 If a ContentBase derivative has no urlconf provided, the CMS page view will
 pick a sensible default template to render it with, and given that this is a
@@ -10,11 +12,14 @@ model called 'Content' in the 'content' app, it renders it with
 `content/content.html`. The only thing we need to render this content object
 is the current page and its content, so this simple default behaviour is good
 enough.
-#}
+{% endcomment %}
 
 {% block main %}
-  {# We have both pages.current (what it sounds like) and its content
-  available in the template here as pages.current.content. #}
+  {% comment %}
+  We have both pages.current (what it sounds like) and its content
+  available in the template here as pages.current.content.
+  {% endcomment %}
+
   <h1>{{ pages.current.title }}</h1>
 
   {% if pages.current.content.introduction %}
@@ -24,7 +29,7 @@ enough.
   {% endif %}
 
   {# remember that ContentSection is FKed to `page`, not `Content` :) #}
-  {% for section in pages.current.contentsection_set.all() %}
+  {% for section in pages.current.contentsection_set.all %}
     <section>
       <h2>{{ section.title }}</h2>
 

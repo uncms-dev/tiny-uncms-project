@@ -63,37 +63,10 @@ INSTALLED_APPS = [
 ]
 
 
-# The CMS does not require this, but the TEMPLATES setting below does.
+# UnCMS does not require this, but the TEMPLATES setting below does.
 SITE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 TEMPLATES = [
-    {
-        'BACKEND': 'django_jinja.backend.Jinja2',
-        'DIRS': [
-            os.path.join(SITE_ROOT, 'templates'),
-        ],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'match_extension': '.html',
-            'match_regex': r'^(?!admin/|reversion/|registration/|jet.dashboard/|adminsortable2/|sitemap\.xml|debug_toolbar/).*',
-            'app_dirname': 'templates',
-            'newstyle_gettext': True,
-            'autoescape': True,
-            'auto_reload': False,
-            'translation_engine': 'django.utils.translation',
-            'context_processors': [
-                'django.contrib.auth.context_processors.auth',
-                'django.template.context_processors.debug',
-                'django.template.context_processors.i18n',
-                'django.template.context_processors.media',
-                'django.template.context_processors.static',
-                'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.request',
-                # This puts the current page tree into the context, as `pages`.
-                'uncms.pages.context_processors.pages',
-            ],
-        },
-    },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
