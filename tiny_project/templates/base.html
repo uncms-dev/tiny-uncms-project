@@ -2,41 +2,10 @@
 <html lang="en">
   {% load static uncms_pages uncms_pagination %}
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-    <meta name="robots" content="{% meta_robots %}">
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 
-    {% block canonical %}
-      <link rel="canonical" href="{% canonical_url %}" />
-    {% endblock %}
-
-    {% if page_obj and page_obj.has_other_pages %}
-      {% if page_obj.has_previous %}
-        <link rel="previous" href="{% pagination_url page_obj.previous_page_number %}">
-      {% endif %}
-
-      {% if page_obj.has_next %}
-        <link rel="next" href="{% pagination_url page_obj.next_page_number %}">
-      {% endif %}
-    {% endif %}
-
-    <meta name="description" content="{% meta_description %}">
-    <!-- Open Graph data -->
-    <meta property="og:title" content="{% og_title %}">
-    <meta property="og:url" content="{% canonical_url %}">
-    <meta property="og:type" content="website">
-    <meta property="og:description" content="{% og_description %}">
-    <meta property="og:image" content="{% og_image %}">
-
-    <!-- Twitter card data -->
-    <meta name="twitter:card" content="{% twitter_card %}" />
-    <meta name="twitter:site" content="" />
-    <meta name="twitter:title" content="{% twitter_title %}" />
-    <meta name="twitter:description" content="{% twitter_description %}" />
-    <meta name="twitter:image" content="{% twitter_image %}" />
-
-    <title>{% block title %}{% title %}{% endblock %}</title>
+    {% include 'pages/head_meta.html' %}
 
     {% block feeds %}{% endblock %}
 
