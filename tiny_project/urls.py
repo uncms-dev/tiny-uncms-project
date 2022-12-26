@@ -2,9 +2,8 @@ from uncms.sitemaps import registered_sitemaps
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.contenttypes import views as contenttypes_views
 from django.contrib.sitemaps import views as sitemaps_views
-from django.urls import include, path, re_path
+from django.urls import include, path
 
 from tiny_project.views import RobotsTxtView
 
@@ -14,10 +13,6 @@ admin.autodiscover()
 urlpatterns = [
     # Standard admin URLs.
     path('admin/', admin.site.urls),
-
-    # Permalink redirection service. Parts of UnCMS, specifically HTML
-    # filtering, depend on this.
-    re_path(r'^r/(?P<content_type_id>\d+)-(?P<object_id>[^/]+)/$', contenttypes_views.shortcut, name='permalink_redirect'),
 
     # Google sitemap service. UnCMS models play nice with these too!
     path('sitemap.xml', sitemaps_views.index, {'sitemaps': registered_sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
