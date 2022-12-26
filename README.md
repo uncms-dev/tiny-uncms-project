@@ -24,9 +24,8 @@ Quickstart:
 # add your SECRET_KEY herein :)
 nano tiny_project/settings/local.py
 createdb tiny_project
-# A minimum of 3.8 is required. Later versions should work fine, but this is
-# what the Ubuntu box this is being written from ships with by default. :)
-python3 -m venv
+# A minimum of 3.8 is required. Later versions should work fine.
+python3 -m venv .venv
 . .venv/bin/activate
 pip install -r requirements.txt
 ./manage.py runserver
