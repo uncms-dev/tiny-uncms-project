@@ -20,11 +20,11 @@ urlpatterns = [
     re_path(r'^r/(?P<content_type_id>\d+)-(?P<object_id>[^/]+)/$', contenttypes_views.shortcut, name='permalink_redirect'),
 
     # Google sitemap service. UnCMS models play nice with these too!
-    re_path(r'^sitemap.xml$', sitemaps_views.index, {'sitemaps': registered_sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('sitemap.xml', sitemaps_views.index, {'sitemaps': registered_sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     # And not just with pages; anything that has a get_absolute_url method can
     # register itself, but it works especially well with anything that inherits
     # from our PageBase model.
-    re_path(r'^sitemap-(?P<section>.+)\.xml$', sitemaps_views.sitemap, {'sitemaps': registered_sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('sitemap-<str:section>.xml', sitemaps_views.sitemap, {'sitemaps': registered_sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('library/', include('uncms.media.urls', namespace='media_library')),
     path('robots.txt', RobotsTxtView.as_view(), name='robots_txt'),
 ] + static(
