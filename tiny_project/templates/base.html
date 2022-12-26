@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  {% load static uncms_pages uncms_pagination %}
+  {% load static uncms_pages %}
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    {% comment %}
+      `pages/head_meta.html` will include all of the page metadata that UnCMS
+      knows about, such as title, meta description, OpenGraph tags, etc.
+      This is the fastest way to include all of your page metadata.
+    {% endcomment %}
     {% include 'pages/head_meta.html' %}
 
     {% block feeds %}{% endblock %}
