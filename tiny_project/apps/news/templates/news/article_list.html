@@ -1,13 +1,23 @@
 {% extends 'base.html' %}
 
-{% load uncms_pagination %}
+{% load uncms_pages uncms_pagination %}
 
 
 {% block main %}
   <ul>
     {% for object in object_list %}
       <li>
-        <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
+        {% comment %}
+          Note our use of the page_url template tag here (from uncms_pages).
+          We have `get_absolute_url` on our article model, but that requires
+          that the article looks up its parent page, and that page's parent,
+          up to the top level of the page. page_url can take the current page
+          (as we restrict our list view to only the current page, this will
+          be the correct one) and reverse the URLs on that. As `pages.current`
+          will usually have the ancestors in the tree already fetched, this
+          will result in zero database queries to get the article's URL.
+        {% endcomment %}
+        <a href="{% page_url pages.current 'article_detail' slug=object.slug %}">{{ object.title }}</a>
       </li>
     {% endfor %}
   </ul>
