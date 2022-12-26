@@ -1,3 +1,4 @@
+# noqa:F403,F405
 import os
 import os.path
 
@@ -11,8 +12,6 @@ MEDIA_ROOT = os.path.expanduser(os.path.join('~/Sites', SITE_DOMAIN, 'media'))
 STATIC_ROOT = os.path.expanduser(os.path.join('~/Sites', SITE_DOMAIN, 'static'))
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
-
-SITE_DOMAIN = 'localhost:8000'
 
 ALLOWED_HOSTS = [
     '127.0.0.1',

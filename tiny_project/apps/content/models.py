@@ -1,6 +1,6 @@
-from uncms.pages.models import ContentBase
-from uncms.models import HtmlField
 from django.db import models
+from uncms.models import HtmlField
+from uncms.pages.models import ContentBase
 
 
 class Content(ContentBase):

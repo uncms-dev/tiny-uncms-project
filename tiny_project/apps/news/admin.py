@@ -10,8 +10,8 @@
 # the ONLINE_DEFAULT setting (whether newly objects are on or offline by
 # default).
 
-from uncms.admin import PageBaseAdmin
 from django.contrib import admin
+from uncms.admin import PageBaseAdmin
 
 from .models import Article, NewsFeed
 
@@ -34,12 +34,12 @@ class ArticleAdmin(PageBaseAdmin):
         PageBaseAdmin.OPENGRAPH_TWITTER_FIELDS,
     ]
 
-    def get_form(self, request, obj=None, **kwargs):
+    def get_form(self, request, obj=None, change=False, **kwargs):
         '''
         We don't *have* to do this, and one wonders if it is slightly out
         of scope for a tiny demo UnCMS project. But it is kind to have
         sensible defaults :)
         '''
-        form = super(ArticleAdmin, self).get_form(request, obj, **kwargs)
+        form = super(ArticleAdmin, self).get_form(request, obj=obj, change=change, **kwargs)
         form.base_fields['page'].initial = NewsFeed.objects.first()
         return form

@@ -1,9 +1,9 @@
-from uncms.sitemaps import registered_sitemaps
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.sitemaps import views as sitemaps_views
 from django.urls import include, path
+from uncms.sitemaps import registered_sitemaps
 
 from tiny_project.views import RobotsTxtView
 

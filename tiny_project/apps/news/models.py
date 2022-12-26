@@ -5,16 +5,17 @@ This will demonstrate UnCMS's PageBase helper class, per-page URL routing,
 and others.
 '''
 
+# UnCMS plays nice with standard Django fields too :) There is no need for
+# special field types on your content models.
+from django.db import models
+from django.utils.timezone import now
 # We'll do a fuller explanation of these fields later. Search ahead if you're
 # impatient. But, we want images...
 from uncms.media.models import ImageRefField
-# ...and we want to create a page content model...
-from uncms.pages.models import ContentBase
 # ...and a nice HTML editor, and two things we'll explain later...
 from uncms.models import HtmlField, PageBase, PageBaseManager
-# ..and of course UnCMS plays nice with standard Django fields too :)
-from django.db import models
-from django.utils.timezone import now
+# ...and we want to create a page content model...
+from uncms.pages.models import ContentBase
 
 
 class NewsFeed(ContentBase):

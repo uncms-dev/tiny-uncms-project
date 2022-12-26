@@ -1,6 +1,6 @@
 [MASTER]
 profile=no
-ignore=CVS, tests, urls.py, migrations
+ignore=CVS, tests
 persistent=yes
 load-plugins=pylint_django,pylint.extensions.mccabe
 

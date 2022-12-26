@@ -8,8 +8,6 @@ attention to, or at least copy-paste :)
 """
 
 import os
-import sys
-
 
 SITE_NAME = 'a tiny project'
 

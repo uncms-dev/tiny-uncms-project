@@ -1,0 +1,13 @@
+[flake8]
+exclude = .venv
+ignore =
+    # Line too long. I won't make code look worse to fit within 78 characters.
+    E501,
+    # No bare except. We run Pylint which catches this.
+    E722,
+    # Line break after binary operator. Purely personal preference (and
+    # Django's Q looks nicer this way).
+    W504,
+    # Star imports, used in local.py
+    F403,
+    F405,
