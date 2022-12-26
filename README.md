@@ -1,7 +1,7 @@
 a tiny UnCMS project 🐭
 =======================
 
-This is a tiny project which documents some core functions of [UnCMS](https://github.com/lewiscollard/uncms) and demonstrating how to make friends with UnCMS's helper models and admin classes.
+This is a tiny project which documents some core functions of [UnCMS](https://github.com/uncms-dev/uncms) and demonstrating how to make friends with UnCMS's helper models and admin classes.
 This is probably the most absurdly highly-commented code you will ever read;
 it's intended as a crash-course in building sites with UnCMS.
 
