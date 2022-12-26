@@ -128,7 +128,6 @@ SILENCED_SYSTEM_CHECKS = []
 TIME_ZONE = 'Europe/London'
 LANGUAGE_CODE = 'en-gb'
 USE_I18N = False
-USE_L10N = True
 USE_TZ = True
 
 ROOT_URLCONF = 'tiny_project.urls'
