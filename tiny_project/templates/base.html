@@ -33,6 +33,34 @@
     </header>
 
     <main class="lyt-Main">
+      {% comment %}
+        Here we demonstrate some of the more advanced usage of breadcrumbs.
+        The default template will not show a breadcrumb trail if there are no
+        items. But if you have a wrapping element in your page context, you
+        don't want to show it if the breadcrumb trail is empty. It will be
+        empty on the home page, for example, if you do not use show_tail.
+
+        Here, we *do* use show_tail, if only as a demonstration of using it.
+        But we want to conditionally show a wrapping <nav> tag, *and* only if
+        there is more than one item in the breadcrumb trail. We can use
+        get_breadcrumbs to get a Breadcrumbs object, and then only show its
+        count if there is more than one breadcrumb to show.
+
+        There is also a project-local template override to add arrows after
+        all but the latest item in the navigation - see
+        `tiny_project/templates/pages/breadcrumbs.html`.
+      {% endcomment %}
+
+      {% get_breadcrumbs as page_breadcrumbs %}
+      {% if page_breadcrumbs.count > 2 %}
+        <nav aria-label="breadcrumbs" class="lyt-Main__Breadcrumbs">
+          You are here:
+          {% block breadcrumbs %}
+            {% breadcrumbs page_breadcrumbs show_tail=True %}
+          {% endblock %}
+        </nav>
+      {% endif %}
+
       {% block main %}
       {% endblock %}
     </main>

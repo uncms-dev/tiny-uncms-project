@@ -9,4 +9,4 @@ pylint-django==2.0.5
 pylint-plugin-utils==0.5
 python-dateutil==2.8.0
 python-magic==0.4.15
-uncms==0.0.1
+uncms==0.0.4

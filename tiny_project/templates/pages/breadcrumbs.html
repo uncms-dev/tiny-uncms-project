@@ -1,0 +1,14 @@
+{% extends 'pages/breadcrumbs.html' %}
+
+{% comment %}
+  This template provides an example of a template override for breadcrumbs.
+  We want to show an arrow after the item, but only if it's not the last
+  item in the list. "count" is available in the context as the total count
+  of breadcrumbs that will be rendered, "breadcrumb" will be available in
+  the item_bottom block, and "breadcrumb" has an "index", which is a 1-based
+  index of the item. If breadcrumb.index == count, we're on the last item.
+{% endcomment %}
+
+{% block item_bottom %}
+  {% if not breadcrumb.index == count %}<span aria-hidden="true">➡️</span>{% endif %}
+{% endblock %}
