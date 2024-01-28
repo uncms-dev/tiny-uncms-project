@@ -31,7 +31,6 @@ class ArticleAdmin(PageBaseAdmin):
         PageBaseAdmin.PUBLICATION_FIELDS,
         PageBaseAdmin.SEO_FIELDS,
         PageBaseAdmin.OPENGRAPH_FIELDS,
-        PageBaseAdmin.OPENGRAPH_TWITTER_FIELDS,
     ]
 
     def get_form(self, request, obj=None, change=False, **kwargs):

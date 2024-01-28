@@ -11,8 +11,8 @@ import os
 
 SITE_NAME = 'a tiny project'
 
-# This isn't used by UnCMS, but let's define it here rather than several times
-# in this file.
+# This isn't used by UnCMS (it expects this in its configuration dict), but
+# let's define it here rather than several times in this file.
 SITE_DOMAIN = 'example.com'
 
 UNCMS = {
@@ -51,6 +51,11 @@ INSTALLED_APPS = [
     # This is not required at all, but it's handy. It provides a Link content
     # model that allows entries in your navigation to link to arbitrary URLs.
     'uncms.links',
+    # This is also totally optional, but almost every site (especially sites
+    # which already existed before being converted to UnCMS) will require
+    # something like it. This allows creating redirects from one URL to
+    # another. It will be under "Redirects" in your admin.
+    'uncms.redirects',
 
     # Our local apps. You'll want to look at the code for them after you have
     # read this settings file.
@@ -102,9 +107,9 @@ MIDDLEWARE = [
     'uncms.middleware.PublicationMiddleware',
     # This annotates requests with the current page tree (as `request.pages`).
     'uncms.pages.middleware.PageMiddleware',
+    # This handles redirects from broken URLs to new ones.
+    'uncms.redirects.middleware.RedirectFallbackMiddleware',
 ]
-
-X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 ALLOWED_HOSTS = [
     SITE_DOMAIN,
