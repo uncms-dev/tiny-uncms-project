@@ -10,7 +10,7 @@ img {
   height: auto;
 }
 
-.hd-Header {
+.header {
   align-items: center;
   justify-content: space-between;
 
@@ -21,11 +21,11 @@ img {
   color: #fff;
 }
 
-.hd-Header a {
+.header a {
   color: inherit;
 }
 
-.lyt-Main__Breadcrumbs {
+.main__breadcrumbs {
   background-color: #eee;
   padding: 5px 10px;
 }

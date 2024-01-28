@@ -24,15 +24,15 @@
   </head>
 
   <body>
-    <header class="hd-Header">
-      <a class="hd-Header_Title" href="/">a tiny project</a>
+    <header class="header">
+      <a class="header__title" href="/">a tiny project</a>
 
-      <nav class="hd-Nav">
+      <nav class="header__navigation">
         {% navigation pages.homepage.navigation %}
       </nav>
     </header>
 
-    <main class="lyt-Main">
+    <main class="main">
       {% comment %}
         Here we demonstrate some of the more advanced usage of breadcrumbs.
         The default template will not show a breadcrumb trail if there are no
@@ -53,7 +53,7 @@
 
       {% get_breadcrumbs as page_breadcrumbs %}
       {% if page_breadcrumbs.count > 2 %}
-        <nav aria-label="breadcrumbs" class="lyt-Main__Breadcrumbs">
+        <nav aria-label="breadcrumbs" class="main__breadcrumbs">
           You are here:
           {% block breadcrumbs %}
             {% breadcrumbs page_breadcrumbs show_tail=True %}
