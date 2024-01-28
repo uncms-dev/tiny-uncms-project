@@ -113,7 +113,7 @@ MIDDLEWARE = [
 
 ALLOWED_HOSTS = [
     SITE_DOMAIN,
-    'www.{}'.format(SITE_DOMAIN),
+    f'www.{SITE_DOMAIN}',
 ]
 
 DATABASES = {

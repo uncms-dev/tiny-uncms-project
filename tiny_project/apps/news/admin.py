@@ -39,6 +39,6 @@ class ArticleAdmin(PageBaseAdmin):
         of scope for a tiny demo UnCMS project. But it is kind to have
         sensible defaults :)
         '''
-        form = super(ArticleAdmin, self).get_form(request, obj=obj, change=change, **kwargs)
+        form = super().get_form(request, obj=obj, change=change, **kwargs)
         form.base_fields['page'].initial = NewsFeed.objects.first()
         return form

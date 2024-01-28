@@ -1,0 +1,30 @@
+[tool.isort]
+skip_glob = [".venv", "node_modules"]
+
+
+[tool.pylint.main]
+jobs = 2
+score = false
+load-plugins = ["pylint_django", "pylint.extensions.bad_builtin"]
+bad-functions = ["print"]
+django-settings-module = "tiny_project.settings.local"
+
+[tool.pylint."MESSAGES CONTROL"]
+disable = [
+  # You'll have a hard time making Django things with these enabled.
+  "invalid-name",
+  "unused-argument",
+  # pylint's code duplication has far too many false positives.
+  "duplicate-code",
+  # Black takes care of formatting.
+  "line-too-long",
+  # Arbitrary and annoying
+  "too-few-public-methods",
+  "too-many-ancestors",
+  # These options more often than not just force people to write docstrings
+  # for the sake of writing docstrings. Write them when they are necessary.
+  # Don't write them when it's self-explanatory.
+  "missing-module-docstring",
+  "missing-function-docstring",
+  "missing-class-docstring",
+]
