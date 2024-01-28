@@ -1,27 +1,30 @@
-'''
+"""
 Models used by the tiny project's news app.
 
 This will demonstrate UnCMS's PageBase helper class, per-page URL routing,
 and others.
-'''
+"""
 
 # UnCMS plays nice with standard Django fields too :) There is no need for
 # special field types on your content models.
 from django.db import models
 from django.utils.timezone import now
+
 # We'll do a fuller explanation of these fields later. Search ahead if you're
 # impatient. But, we want images...
 from uncms.media.models import ImageRefField
+
 # ...and a nice HTML editor, and two things we'll explain later...
 from uncms.models import HtmlField, PageBase, PageBaseManager
+
 # ...and we want to create a page content model...
 from uncms.pages.models import ContentBase
 
 
 class NewsFeed(ContentBase):
-    '''
+    """
     A stream of news articles.
-    '''
+    """
 
     # On the "Add a page" screen, the available page types are broken down
     # into classifiers. Really, this is just a heading under which this page
@@ -32,7 +35,7 @@ class NewsFeed(ContentBase):
     # like.
     #
     # This will be title-cased when it is rendered in the admin.
-    classifier = 'content'
+    classifier = "content"
 
     # An icon at this location (under your static files directory) will be
     # displayed in the "Add a page" screen. ContentBase has a default icon,
@@ -42,7 +45,7 @@ class NewsFeed(ContentBase):
     # Want some help? At Onespacemedia we made a whole lot of icons in the
     # same style which are perfect for the 'Add a page' screen. Go get one for
     # your app here: https://github.com/onespacemedia/cms-icons
-    icon = 'icons/news.png'
+    icon = "icons/news.png"
 
     # The urlconf used to power this content's views. We don't *have* to
     # specify this at all! If we did not then it would simply render a
@@ -52,7 +55,7 @@ class NewsFeed(ContentBase):
     #
     # In fact, even the default view mentioned above comes from a urlconf on
     # ContentBase, with an extremely simple TemplateView derivative.
-    urlconf = 'tiny_project.apps.news.urls'
+    urlconf = "tiny_project.apps.news.urls"
 
     # ContentBase derivatives don't have ModelAdmins at all - their fields get
     # automatically patched into the form for the *Page*. But, we like
@@ -60,9 +63,12 @@ class NewsFeed(ContentBase):
     # list the various SEO and publication fields on the Page here; these will
     # be added automatically.
     fieldsets = [
-        ('Settings', {
-            'fields': ['per_page'],
-        }),
+        (
+            "Settings",
+            {
+                "fields": ["per_page"],
+            },
+        ),
     ]
 
     # And on to some model fields. The great part of the simple data model of
@@ -80,7 +86,7 @@ class NewsFeed(ContentBase):
     # fields.
 
     per_page = models.IntegerField(
-        verbose_name='Articles per page',
+        verbose_name="Articles per page",
         default=12,
     )
 
@@ -127,7 +133,7 @@ class ArticleManager(PageBaseManager):
 # formed from their first and last names.
 #
 class Article(PageBase):
-    '''A simple news article.'''
+    """A simple news article."""
 
     objects = ArticleManager()
 
@@ -138,11 +144,11 @@ class Article(PageBase):
     # only the news articles which have this ForeignKey set to the currently
     # active page - alternatively put, that "belong" to it.
     page = models.ForeignKey(
-        'news.NewsFeed',
+        "news.NewsFeed",
         on_delete=models.PROTECT,
         null=True,
         blank=False,
-        verbose_name='News feed'
+        verbose_name="News feed",
     )
 
     # ImageRefField is a ForeignKey to `media.File`, but it uses a raw ID
@@ -177,8 +183,8 @@ class Article(PageBase):
         # page (as above) they'll both have the same URL, and the
         # queryset.get(...) will throw MultipleObjectsReturned. Let's stop
         # that from happening.
-        unique_together = [['page', 'slug']]
-        ordering = ['-date']
+        unique_together = [["page", "slug"]]
+        ordering = ["-date"]
 
     def __str__(self):
         return self.title
@@ -190,6 +196,9 @@ class Article(PageBase):
         #
         # self.page here is our NewsFeed (content model), and self.page.page
         # is the page to which our content model is attached.
-        return self.page.page.reverse('article_detail', kwargs={
-            'slug': self.slug,
-        })
+        return self.page.page.reverse(
+            "article_detail",
+            kwargs={
+                "slug": self.slug,
+            },
+        )

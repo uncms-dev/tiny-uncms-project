@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('news', '0001_initial'),
+        ("news", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='article',
-            name='slug',
-            field=models.SlugField(help_text='A unique portion of the URL that is used to identify this specific page using human-readable keywords (e.g., about-us)'),
+            model_name="article",
+            name="slug",
+            field=models.SlugField(
+                help_text="A unique portion of the URL that is used to identify this specific page using human-readable keywords (e.g., about-us)"
+            ),
         ),
     ]

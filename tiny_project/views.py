@@ -24,25 +24,25 @@ class RobotsTxtView(robots.RobotsTxtView):
     # Using the value of SITE_DOMAIN, sitemap URLs will be normalised to a
     # full URL including protocol (assumed to be `https` when DEBUG is False)
     # and domain.
-    sitemaps = [reverse_lazy('django.contrib.sitemaps.views.sitemap')]
+    sitemaps = [reverse_lazy("django.contrib.sitemaps.views.sitemap")]
 
     # Let's add some rules for user agents.
     user_agents = [
         robots.UserAgentRule(
             # "agent" can be either a single bot (a string), or a list of
             # strings.
-            agent=['Megabot 9000', 'Turbotron 9001'],
-            allow='/',
+            agent=["Megabot 9000", "Turbotron 9001"],
+            allow="/",
             # Disallow can either be a single path, or a list of paths. Paths
             # are forced to strings so they can be either strings or lazy
             # objects as returned by reverse_lazy.
-            disallow=[reverse_lazy('admin:index')],
+            disallow=[reverse_lazy("admin:index")],
         ),
         robots.UserAgentRule(
-            agent='Badbot',
-            disallow='/',
+            agent="Badbot",
+            disallow="/",
             # You may specify a comment which will be placed immediately above
             # the rule.
-            comment='Go away',
+            comment="Go away",
         ),
     ]

@@ -5,6 +5,8 @@ ignore =
     E501,
     # No bare except. We run Pylint which catches this.
     E722,
+    # Line break before binary operator - conflicts with Black.
+    W503,
     # Line break after binary operator. Purely personal preference (and
     # Django's Q looks nicer this way).
     W504,

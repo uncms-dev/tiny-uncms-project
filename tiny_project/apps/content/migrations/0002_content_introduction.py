@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('content', '0001_initial'),
+        ("content", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='content',
-            name='introduction',
+            model_name="content",
+            name="introduction",
             field=models.TextField(blank=True, null=True),
         ),
     ]

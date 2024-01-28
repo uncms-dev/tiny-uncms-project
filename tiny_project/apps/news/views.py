@@ -8,7 +8,8 @@ from .models import Article
 
 
 class ArticleListView(ListView):
-    '''Displays a list of articles.'''
+    """Displays a list of articles."""
+
     # ^ hey, don't write docstrings like this. Unless you are the kind of
     # person to write a class called ArticleListView that is not a view that
     # lists articles, in which case you have other, deeper-seated problems. :)
@@ -32,9 +33,7 @@ class ArticleListView(ListView):
         # articles that "belong" to the current page. Once again, our
         # PageMiddleware and its friend RequestPageManager make this really
         # easy.
-        return super().get_queryset().filter(
-            page__page=self.request.pages.current
-        )
+        return super().get_queryset().filter(page__page=self.request.pages.current)
 
 
 # Let's talk about PageDetailView.
@@ -55,6 +54,10 @@ class ArticleDetailView(PageDetailView):
     model = Article
 
     def get_queryset(self):
-        return super().get_queryset().filter(
-            page__page=self.request.pages.current,
+        return (
+            super()
+            .get_queryset()
+            .filter(
+                page__page=self.request.pages.current,
+            )
         )

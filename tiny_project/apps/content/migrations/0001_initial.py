@@ -12,30 +12,53 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('pages', '0006_auto_20151002_1655'),
+        ("pages", "0006_auto_20151002_1655"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Content',
+            name="Content",
             fields=[
-                ('page', models.OneToOneField(editable=False, on_delete=django.db.models.deletion.CASCADE, primary_key=True, related_name='+', serialize=False, to='pages.Page')),
+                (
+                    "page",
+                    models.OneToOneField(
+                        editable=False,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        primary_key=True,
+                        related_name="+",
+                        serialize=False,
+                        to="pages.Page",
+                    ),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
         migrations.CreateModel(
-            name='ContentSection',
+            name="ContentSection",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=100)),
-                ('text', uncms.models.fields.HtmlField(blank=True, null=True)),
-                ('order', models.PositiveIntegerField(default=0)),
-                ('page', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='pages.Page')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=100)),
+                ("text", uncms.models.fields.HtmlField(blank=True, null=True)),
+                ("order", models.PositiveIntegerField(default=0)),
+                (
+                    "page",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="pages.Page"
+                    ),
+                ),
             ],
             options={
-                'ordering': ['order'],
+                "ordering": ["order"],
             },
         ),
     ]

@@ -30,10 +30,13 @@ class Content(ContentBase):
         # just need to override get_searchable_text on our content model and
         # throw in all of the text of our ContentSection too.
         text = super().get_searchable_text()
-        return ' '.join([text] + [
-            section.title + ' ' + (section.text or '')
-            for section in self.page.contentsection_set.all()
-        ])
+        return " ".join(
+            [text]
+            + [
+                section.title + " " + (section.text or "")
+                for section in self.page.contentsection_set.all()
+            ]
+        )
 
 
 class ContentSection(models.Model):
@@ -44,7 +47,7 @@ class ContentSection(models.Model):
     # inlines work. Note that it is to the *Page* itself and not the content
     # model!
     page = models.ForeignKey(
-        'pages.Page',
+        "pages.Page",
         on_delete=models.CASCADE,
     )
 
@@ -66,4 +69,4 @@ class ContentSection(models.Model):
         return self.title
 
     class Meta:
-        ordering = ['order']
+        ordering = ["order"]

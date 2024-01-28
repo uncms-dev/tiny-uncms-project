@@ -1,4 +1,5 @@
 [tool.isort]
+profile = "black"
 skip_glob = [".venv", "node_modules"]
 
 
