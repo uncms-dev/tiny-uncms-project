@@ -25,6 +25,8 @@ Quickstart:
 nano tiny_project/settings/local.py
 createdb tiny_project
 # A minimum of 3.8 is required. Later versions should work fine.
+# Shortcut for "delete venv, recreate venv, install requirements" is
+# ./scripts/bootstrap.sh
 python3 -m venv .venv
 . .venv/bin/activate
 pip install -r requirements.txt
